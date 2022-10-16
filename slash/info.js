@@ -16,10 +16,10 @@ module.exports = {
     });
     const song = queue.current;
     const embed = new EmbedBuilder()
-      .setTitle("Song Info")
+      .setTitle("Thông tin bài hát đang phát")
       .setThumbnail(song.thumbnail)
       .setDescription(
-        `**Tên bài hát:** ${song.title}\n**Thời gian:** ${song.duration}\n**Yêu cầu bởi:** ${song.requestedBy}\n**URL:** ${song.url}\n**Tiến trình:** ${bar}`
+        `**Tên bài hát:** ${song.title}\n**Thời gian:** ${song.duration}\n**Yêu cầu bởi:** ${song.requestedBy}\n**URL:** ${song.url}\n**Tiến trình:** \n${bar}`
       );
     interaction.editReply({ embeds: [embed] });
   },
