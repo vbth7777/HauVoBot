@@ -2,6 +2,7 @@ const wait = require("node:timers/promises").setTimeout;
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { EmbedBuilder } = require("discord.js");
+const { color } = require("../core/config.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,6 +25,7 @@ module.exports = {
     }
     const getEmbed = (queueTracks, page = 1) => {
       const embed = new EmbedBuilder()
+        .setColor(color)
         .setDescription(
           `**Bài hát đang phát**: ${currentSong.title} - ${currentSong.requestedBy.username}\n\n**Hàng đợi**:\n` +
             queueTracks

@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { EmbedBuilder } = require("discord.js");
+const Discord = require("discord.js");
+const { color } = require("../core/config.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,10 +18,11 @@ module.exports = {
     });
     const song = queue.current;
     const embed = new EmbedBuilder()
+      .setColor(color)
       .setTitle("Thông tin bài hát đang phát")
       .setThumbnail(song.thumbnail)
       .setDescription(
-        `**Tên bài hát:** ${song.title}\n**Thời gian:** ${song.duration}\n**Yêu cầu bởi:** ${song.requestedBy}\n**URL:** ${song.url}\n**Tiến trình:** \n${bar}`
+        `**Tên bài hát:** ${song.title}\n\n**Thời gian:** ${song.duration}\n\n**Yêu cầu bởi:** ${song.requestedBy}\n\n**URL:** ${song.url}\n\n**Tiến trình:** \n\n${bar}`
       );
     interaction.editReply({ embeds: [embed] });
   },

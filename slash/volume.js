@@ -1,11 +1,14 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { EmbedBuilder } = require("discord.js");
+const { color } = require("../core/config.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("volume")
     .setDescription("Thay đổi âm lượng")
-    .addIntegerOption((option) => option.setName("volume").setDescription("Âm lượng")),
+    .addIntegerOption((option) =>
+      option.setName("volume").setDescription("Âm lượng")
+    ),
   run: async (client, interaction) => {
     const queue = client.player.getQueue(interaction.guild);
     if (!queue || !queue.playing) {
@@ -17,7 +20,11 @@ module.exports = {
     }
     const success = queue.setVolume(volume);
     return interaction.editReply({
-      embeds: [new EmbedBuilder().setDescription(`Âm lượng đã được đặt thành ${volume}`)],
+      embeds: [
+        new EmbedBuilder()
+          .setColor(color)
+          .setDescription(`Âm lượng đã được đặt thành ${volume}`),
+      ],
     });
-  }
-}
+  },
+};

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { EmbedBuilder } = require("discord.js");
+const { color } = require("../core/config.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,7 +21,9 @@ module.exports = {
     const success = queue.jump(number);
     return interaction.editReply({
       embeds: [
-        new EmbedBuilder().setDescription(`Đã bỏ qua ${number} bài hát`),
+        new EmbedBuilder()
+          .setColor(color)
+          .setDescription(`Đã bỏ qua ${number} bài hát`),
       ],
     });
   },
