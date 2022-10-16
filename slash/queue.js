@@ -35,7 +35,6 @@ module.exports = {
           .setDescription(
             `**Current Song**: ${currentSong.title} - ${currentSong.requestedBy.username}\n\n**Queue**:\n${queueString}`
           )
-          .setFooter(`Page ${page + 1} of ${totalPages}`)
           .setThumbnail(currentSong.thumbnail),
       ],
     });
