@@ -5,6 +5,7 @@ const { Routes } = require("discord-api-types/v9");
 const fs = require("fs");
 const { Player } = require("discord-player");
 const { GatewayIntentBits } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 dotenv.config();
 const TOKEN = process.env.TOKEN;
@@ -64,17 +65,15 @@ if (LOAD_SLASH) {
       if (!interaction.isCommand()) return;
 
       const slashcmd = client.slashcommands.get(interaction.commandName);
-      if (!slashcmd) interaction.reply("Not a valid Slash Command");
+      if (!slashcmd)
+        interaction.reply({
+          embeds: [new EmbedBuilder().setDescription("Lệnh không hợp lệ")],
+        });
 
       await interaction.deferReply();
       await slashcmd.run(client, interaction);
     }
     handleCommand();
-  });
-  client.player.on("trackStart", (queue, track) => {
-    queue.metadata.send({
-      embeds: [{ description: `Now playing ${track.title}` }],
-    });
   });
   client.login(TOKEN);
 }

@@ -4,15 +4,15 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("resume")
-    .setDescription("Resume the current song"),
+    .setDescription("Tiếp tục phát nhạc"),
   run: async (client, interaction) => {
     const queue = client.player.getQueue(interaction.guild);
     if (!queue || !queue.playing) {
-      return interaction.editReply("There are no songs in the queue");
+      return interaction.editReply("Không có bài hát nào trong hàng đợi");
     }
     const success = queue.setPaused(false);
     return interaction.editReply({
-      embeds: [new EmbedBuilder().setDescription(`Resumed the song`)],
+      embeds: [new EmbedBuilder().setDescription(`Đã tiếp tục phát nhạc`)],
     });
   },
 };

@@ -4,15 +4,15 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("pause")
-    .setDescription("Pause the current song"),
+    .setDescription("Tạm dừng bài hát"),
   run: async (client, interaction) => {
     const queue = client.player.getQueue(interaction.guild);
     if (!queue || !queue.playing) {
-      return interaction.editReply("There are no songs in the queue");
+      return interaction.editReply("Không có bài hát nào trong hàng đợi");
     }
     const success = queue.setPaused(true);
     return interaction.editReply({
-      embeds: [new EmbedBuilder().setDescription(`Paused the song`)],
+      embeds: [new EmbedBuilder().setDescription(`Đã tạm dừng bài hát`)],
     });
   },
 };

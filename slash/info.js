@@ -4,11 +4,11 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("playing")
-    .setDescription("Get info about song"),
+    .setDescription("Lấy thông tin bài hát đang phát"),
   run: async (client, interaction) => {
     const queue = client.player.getQueue(interaction.guild);
     if (!queue || !queue.playing) {
-      return interaction.editReply("There are no songs in the queue");
+      return interaction.editReply("Không có bài hát nào đang phát");
     }
     let bar = queue.createProgressBar({
       queue: false,
@@ -19,7 +19,7 @@ module.exports = {
       .setTitle("Song Info")
       .setThumbnail(song.thumbnail)
       .setDescription(
-        `**Title:** ${song.title}\n**Duration:** ${song.duration}\n**Requested by:** ${song.requestedBy}\n**URL:** ${song.url}\n**Progress:** ${bar}`
+        `**Tên bài hát:** ${song.title}\n**Thời gian:** ${song.duration}\n**Yêu cầu bởi:** ${song.requestedBy}\n**URL:** ${song.url}\n**Tiến trình:** ${bar}`
       );
     interaction.editReply({ embeds: [embed] });
   },

@@ -4,20 +4,20 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("queue")
-    .setDescription("Show the queue")
+    .setDescription("Xem hàng đợi"),
     .addNumberOption((option) =>
-      option.setName("page").setDescription("The page to show").setMinValue(0)
+      option.setName("page").setDescription("Trang").setMinValue(0)
     ),
   run: async (client, interaction) => {
     const queue = client.player.getQueue(interaction.guild);
     if (!queue || !queue.playing) {
-      return interaction.editReply("There are no songs in the queue");
+      return interaction.editReply("Không có bài hát nào trong hàng đợi");
     }
     const totalPages = Math.ceil(queue.tracks.length / 10) || 1;
     const page = (interaction.options.getNumber("page") || 1) - 1;
     if (page > totalPages) {
       return await interaction.editReply(
-        `The page must be between 1 and ${totalPages}`
+        `Trang phải nằm trong phạm vi từ 1 tới ${totalPages}`
       );
     }
     const queueString = queue.tracks
@@ -33,7 +33,7 @@ module.exports = {
       embeds: [
         new EmbedBuilder()
           .setDescription(
-            `**Current Song**: ${currentSong.title} - ${currentSong.requestedBy.username}\n\n**Queue**:\n${queueString}`
+            `**Bài hát đang phát**: ${currentSong.title} - ${currentSong.requestedBy.username}\n\n**Hàng đợi**:\n${queueString}`
           )
           .setThumbnail(currentSong.thumbnail),
       ],

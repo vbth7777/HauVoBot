@@ -4,15 +4,15 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("skip")
-    .setDescription("Skip the current song"),
+    .setDescription("Bỏ qua bài hát hiện tại"),
   run: async (client, interaction) => {
     const queue = client.player.getQueue(interaction.guild);
     if (!queue || !queue.playing) {
-      return interaction.editReply("There are no songs in the queue");
+      return interaction.editReply("Không có bài hát nào trong hàng đợi");
     }
     const success = queue.skip();
     return interaction.editReply({
-      embeds: [new EmbedBuilder().setDescription(`Skipped the song`)],
+      embeds: [new EmbedBuilder().setDescription(`Đã bỏ qua bài hát`)],
     });
   },
 };
