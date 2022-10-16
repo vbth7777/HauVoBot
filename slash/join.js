@@ -1,12 +1,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { EmbedBuilder } = require("discord.js");
-const Discord = require("discord.js");
 const { color } = require("../core/config.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("pause")
-    .setDescription("Tạm dừng bài hát"),
+    .setName("join")
+    .setDescription("Tham gia kênh thoại"),
   run: async (client, interaction) => {
     const queue = client.player.getQueue(interaction.guild);
     if (!queue || !queue.playing) {
@@ -18,12 +17,12 @@ module.exports = {
         ],
       });
     }
-    const success = queue.setPaused(true);
+    await queue.connect(interaction.member.voice.channel);
     return interaction.editReply({
       embeds: [
         new EmbedBuilder()
           .setColor(color)
-          .setDescription(`Đã tạm dừng bài hát`),
+          .setDescription(`Đã tham gia kênh thoại của bạn`),
       ],
     });
   },

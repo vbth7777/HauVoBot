@@ -12,11 +12,23 @@ module.exports = {
   run: async (client, interaction) => {
     const queue = client.player.getQueue(interaction.guild);
     if (!queue || !queue.playing) {
-      return interaction.editReply("Không có bài hát nào trong hàng đợi");
+      return interaction.editReply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(color)
+            .setDescription("Không có bài hát nào trong hàng đợi"),
+        ],
+      });
     }
     const volume = interaction.options.getInteger("volume");
     if (volume < 0 || volume > 100) {
-      return interaction.editReply("Vui lòng nhập một con số từ 0 đến 100");
+      return interaction.editReply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(color)
+            .setDescription("Vui lòng nhập một con số từ 0 đến 100"),
+        ],
+      });
     }
     const success = queue.setVolume(volume);
     return interaction.editReply({

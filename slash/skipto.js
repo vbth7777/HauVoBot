@@ -15,7 +15,13 @@ module.exports = {
   run: async (client, interaction) => {
     const queue = client.player.getQueue(interaction.guild);
     if (!queue || !queue.playing) {
-      return interaction.editReply("Không có bài hát nào trong hàng đợi");
+      return interaction.editReply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(color)
+            .setDescription("Không có bài hát nào trong hàng đợi"),
+        ],
+      });
     }
     const number = interaction.options.getInteger("number");
     const success = queue.jump(number);
