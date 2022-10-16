@@ -4,7 +4,7 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("queue")
-    .setDescription("Xem hàng đợi"),
+    .setDescription("Xem hàng đợi")
     .addNumberOption((option) =>
       option.setName("page").setDescription("Trang").setMinValue(0)
     ),
